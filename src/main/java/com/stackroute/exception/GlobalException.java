@@ -4,10 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-
-import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class GlobalException {
@@ -21,9 +18,8 @@ public class GlobalException {
 
 
     @ExceptionHandler(TrackNotFound.class)
-    @ResponseStatus(value = HttpStatus.CONFLICT)
     public ResponseEntity<?> noTrack(final Exception ex){
-        return new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
+        return new ResponseEntity<String>(ex.getMessage(),HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(TrackAlreadyExists.class)

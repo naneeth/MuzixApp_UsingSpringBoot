@@ -1,32 +1,32 @@
 package com.stackroute.config;
 
 import com.stackroute.domain.Track;
+import com.stackroute.repository.TrackRepository;
 import com.stackroute.service.TrackService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ApplicationListener implements org.springframework.context.ApplicationListener<ContextRefreshedEvent> {
 
-    TrackService trackService;
-
     @Autowired
-    public ApplicationListener(TrackService trackService) {
-        this.trackService = trackService;
-    }
+    TrackRepository trackRepository;
+
+    @Value("2")
+    private int trackId;
+
+    @Value("default listener")
+    private String trackName;
+
+    @Value("default listener comments")
+    private String comments;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-
-        Track track = new Track();
-        track.setTrackId(0);
-        track.setTrackName("default");
-        track.setComments("default comments");
-        try {
-            trackService.saveTrack(track);
-        }
-        catch (Exception e){}
+        Track track = new Track(trackId, trackName, comments);
+        trackRepository.save(track);
     }
 
 }
