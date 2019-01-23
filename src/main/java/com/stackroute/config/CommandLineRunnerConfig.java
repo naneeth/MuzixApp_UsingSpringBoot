@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @PropertySource("classpath:application.properties")
-public class CommandLineRunner implements org.springframework.boot.CommandLineRunner {
+public class CommandLineRunnerConfig implements org.springframework.boot.CommandLineRunner {
     @Autowired
     TrackRepository trackRepository;
     @Autowired

@@ -8,7 +8,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ApplicationListener implements org.springframework.context.ApplicationListener<ContextRefreshedEvent> {
+public class ApplicationListenerConfig implements org.springframework.context.ApplicationListener<ContextRefreshedEvent> {
     @Autowired
     TrackRepository trackRepository;
     @Value("2")

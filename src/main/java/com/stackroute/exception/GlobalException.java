@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class GlobalException {
 
-//    @ExceptionHandler(TrackAlreadyExists.class) public ResponseEntity< ? > TrackExistsException(final TrackAlreadyExists e) {
+//    @ExceptionHandler(TrackAlreadyExistsException.class) public ResponseEntity< ? > TrackExistsException(final TrackAlreadyExistsException e) {
 //        return error(e, HttpStatus.CONFLICT, e.getMessage());
 //    }
-//    @ExceptionHandler(TrackNotFound.class) public ResponseEntity< ? > NoTrackException(final TrackNotFound e) {
+//    @ExceptionHandler(TrackNotFoundException.class) public ResponseEntity< ? > NoTrackException(final TrackNotFoundException e) {
 //        return error(e, HttpStatus.CONFLICT, e.getMessage());
 //    }
 
 
-    @ExceptionHandler(TrackNotFound.class)
+    @ExceptionHandler(TrackNotFoundException.class)
     public ResponseEntity<?> noTrack(final Exception ex){
         return new ResponseEntity<String>(ex.getMessage(),HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(TrackAlreadyExists.class)
+    @ExceptionHandler(TrackAlreadyExistsException.class)
     @ResponseStatus(value = HttpStatus.CONFLICT)
     public ResponseEntity<?> trackExists(final Exception ex){
         return new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);

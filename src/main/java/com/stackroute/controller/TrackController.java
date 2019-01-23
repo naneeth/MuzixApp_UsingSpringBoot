@@ -1,8 +1,8 @@
 package com.stackroute.controller;
 
 import com.stackroute.domain.Track;
-import com.stackroute.exception.TrackAlreadyExists;
-import com.stackroute.exception.TrackNotFound;
+import com.stackroute.exception.TrackAlreadyExistsException;
+import com.stackroute.exception.TrackNotFoundException;
 import com.stackroute.service.TrackService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,7 +39,7 @@ public class TrackController {
      */
     @ApiOperation(value = "Save Tracks")
     @PostMapping("track")
-    public ResponseEntity<?> saveTrack(@RequestBody Track track) throws TrackAlreadyExists {
+    public ResponseEntity<?> saveTrack(@RequestBody Track track) throws TrackAlreadyExistsException {
         ResponseEntity responseEntity;
         trackService.saveTrack(track);
         responseEntity = new ResponseEntity<String>("Successfully created", HttpStatus.CREATED);
@@ -52,30 +52,28 @@ public class TrackController {
     @GetMapping("tracks")
     public ResponseEntity<?> getAllTrack() {
 
-        return new ResponseEntity<List<Track>>(trackService.getAllTracks(), HttpStatus.OK);
+        return new ResponseEntity<List<Track>>(trackService.getAllTracks(), HttpStatus.FOUND);
     }
     /*
      *This method provide track details to the user of particular track Id.
      */
     @ApiOperation(value = "Get Track By Id")
     @GetMapping("track/{id}")
-    public ResponseEntity<?> getTrackById(@PathVariable int id) throws TrackNotFound {
+    public ResponseEntity<?> getTrackById(@PathVariable int id) throws TrackNotFoundException {
 
-        return new ResponseEntity<Optional<Track>>(trackService.getTrackById(id), HttpStatus.OK);
+        return new ResponseEntity<Optional<Track>>(trackService.getTrackById(id), HttpStatus.FOUND);
     }
-
     @ApiOperation(value = "Find Track By Name")
     @GetMapping("tracks/{name}")
     public ResponseEntity<?> findTrackByTrackName(@PathVariable String name) {
-        return new ResponseEntity<List<Track>>(trackService.findByTrackName(name), HttpStatus.OK);
+        return new ResponseEntity<List<Track>>(trackService.findByTrackName(name), HttpStatus.FOUND);
     }
-
     /*
      * This method help user to update track comment of a particular track Id.
      */
     @ApiOperation(value = "Update Comments")
     @PutMapping("track")
-    public ResponseEntity<?> updateComments(@RequestBody Track track) throws TrackNotFound {
+    public ResponseEntity<?> updateComments(@RequestBody Track track) throws TrackNotFoundException {
         return new ResponseEntity<Track>(trackService.updateComments(track), HttpStatus.OK);
     }
     /*
@@ -83,8 +81,8 @@ public class TrackController {
      */
     @ApiOperation(value = "Delete Tracks By Id")
     @DeleteMapping("track/{id}")
-    public ResponseEntity<?> removeTrack(@PathVariable int id) throws TrackNotFound {
+    public ResponseEntity<?> removeTrack(@PathVariable int id) throws TrackNotFoundException {
         trackService.deleteTrackById(id);
-        return new ResponseEntity<String>("removed", HttpStatus.OK);
+        return new ResponseEntity<String>("removed", HttpStatus.GONE);
     }
 }
