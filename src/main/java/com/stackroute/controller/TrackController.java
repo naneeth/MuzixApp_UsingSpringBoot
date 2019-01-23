@@ -20,7 +20,7 @@ import java.util.Optional;
 @Api(value = "Track")
 public class TrackController {
 
-    TrackService trackService;
+   private TrackService trackService;
 
     @Autowired
     public TrackController(TrackService trackService) {
@@ -57,13 +57,13 @@ public class TrackController {
     }
 
     @ApiOperation(value = "Update Comments")
-    @PutMapping("updatetrack")
+    @PutMapping("track")
     public ResponseEntity<?> updateComments(@RequestBody Track track) throws TrackNotFound {
         return new ResponseEntity<Track>(trackService.updateComments(track), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Delete Tracks By Id")
-    @DeleteMapping("deletetrack/{id}")
+    @DeleteMapping("track/{id}")
     public ResponseEntity<?> removeTrack(@PathVariable int id) throws TrackNotFound {
         trackService.deleteTrackById(id);
         return new ResponseEntity<String>("removed", HttpStatus.OK);
