@@ -20,7 +20,6 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
                 .select().apis(RequestHandlerSelectors.basePackage("com.stackroute.controller"))
                 .paths(regex("/api/v1.*"))
                 .build();
-
     }
 
     @Override

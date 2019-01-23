@@ -2,7 +2,6 @@ package com.stackroute.config;
 
 import com.stackroute.domain.Track;
 import com.stackroute.repository.TrackRepository;
-import com.stackroute.service.TrackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -10,16 +9,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ApplicationListener implements org.springframework.context.ApplicationListener<ContextRefreshedEvent> {
-
     @Autowired
     TrackRepository trackRepository;
-
     @Value("2")
     private int trackId;
-
     @Value("default listener")
     private String trackName;
-
     @Value("default listener comments")
     private String comments;
 

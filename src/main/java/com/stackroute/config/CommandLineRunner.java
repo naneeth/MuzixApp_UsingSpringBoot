@@ -17,9 +17,8 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
     Environment environment;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         Track track = new Track(Integer.parseInt(environment.getProperty("trackId")), environment.getProperty("trackName"), environment.getProperty("comments"));
-
         trackRepository.save(track);
     }
 }
