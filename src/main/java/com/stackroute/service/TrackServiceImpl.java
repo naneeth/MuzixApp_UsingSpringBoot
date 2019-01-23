@@ -48,12 +48,10 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public Track updateComments(Track track) throws TrackAlreadyExists {
-
-        if (trackRepository.existsById(track.getTrackId())) {
-            throw new TrackAlreadyExists("TrackAlreadyExists");
+    public Track updateComments(Track track) throws TrackNotFound {
+        if (!trackRepository.existsById(track.getTrackId())) {
+            throw new TrackNotFound("TrackNotFound");
         } else {
-            trackRepository.delete(track);
             Track savedTrack = trackRepository.save(track);
             return savedTrack;
         }

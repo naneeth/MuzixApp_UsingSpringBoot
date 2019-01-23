@@ -14,7 +14,7 @@ public interface TrackService {
 
     public Optional<Track> getTrackById(int id) throws TrackNotFound;
 
-    public Track updateComments(Track track) throws Exception;
+    public Track updateComments(Track track) throws TrackNotFound;
 
     public void deleteTrackById(int id) throws TrackNotFound;
 
